@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>API</h1>
+</body>
+<script>
+
+    async function getData(){
+
+    //// Fake API For lerning perpuse {~~ https://jsonplaceholder.typicode.com/ ~~}
+
+
+    //// ********************Fatch Methord******************************
+
+
+        const resultFatch =await fetch('https://jsonplaceholder.typicode.com/posts/1/comments')
+        console.log(resultFatch);
+        const dataFatch = await resultFatch.json();
+        console.log(dataFatch);
+    }
+    getData()
+
+
+// //     // ***************************Post Methord******************************
+
+    //// Header create kiya
+    const myHeader = new Headers()
+    myHeader.append("Content-Type", "application/json")
+    
+    ////Store API in a variable
+    const resultPost = 'https://jsonplaceholder.typicode.com/posts'
+
+    //// option object ke andar ye bgtaya ki Given API me krna kya he
+    const option = {
+        method: "Post",
+        body: JSON.stringify({ userName: "Rahul" }),
+        headers: myHeader,
+    } 
+
+//// yaha ak new function create kiya jisme hmne (""option aur given Api"") ko marge kiya aur usko (""json formate me convart"") kiya and console pr print krvaya
+    async function postData() {
+        const responsePost = await fetch(resultPost, option)
+        const dataPost = await responsePost.json();
+        console.log("MyData: ", dataPost)
+    }
+
+    //// yaha pr hmne changes ko confarm krvaya
+    async function checkPostData(){
+        const responsePost = await fetch ('https://jsonplaceholder.typicode.com/posts')
+        const checkPostData = await responsePost.json();
+        console.log("Verifiy Data ", checkPostData );   
+    }
+
+    //// yaha pr precvias function ko call krvaya
+    async function runPostFunction(){
+        await postData()
+        await checkPostData()
+    }
+    runPostFunction()
+
+</script>
+
+</html>
